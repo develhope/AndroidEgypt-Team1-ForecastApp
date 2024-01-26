@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_list_today_screen">
+
+
+    <LinearLayout
+        android:id="@+id/summary_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/today_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/sanseriffic"
+            android:letterSpacing="@dimen/letter_space"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_small_list_today_screen"
+            tools:text="@string/_00_00" />
+
+        <ImageView
+            android:id="@+id/weather_today_image"
+            android:layout_width="@dimen/zero"
+            android:layout_height="@dimen/today_weather_icon_height"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/sun" />
+
+        <TextView
+            android:id="@+id/degrees_today"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/sanseriffic"
+            android:gravity="center"
+            android:letterSpacing="@dimen/letter_space"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_big_list_today_screen"
+            android:textStyle="bold"
+            tools:text="@string/_31" />
+
+        <TextView
+            android:id="@+id/rain_chance_tv"
+            android:layout_width="@dimen/zero"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin_big_list_today_screen"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/droplet"
+            android:fontFamily="@font/sanseriffic"
+            android:letterSpacing="@dimen/letter_space"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textSize_big_list_today_screen"
+            app:drawableStartCompat="@drawable/droplet"
+            tools:text="@string/_0" />
+
+        <ImageView
+            android:id="@+id/arrow_image_today"
+            android:layout_width="@dimen/arrow_icon_width"
+            android:layout_height="@dimen/arrow_icon_height"
+            android:layout_gravity="center"
+            android:rotation="180"
+            android:src="@drawable/arrow_icon_inverted" />
+    </LinearLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/today_cardview"
+        android:layout_width="@dimen/today_cardview_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginTop_cardView_list_today_screen"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="@dimen/cardCornerRadius_cardView_list_today_screen"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/summary_linear_layout"
+        app:strokeColor="@color/stroke_color"
+        app:strokeWidth="0.5dp"
+        tools:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_cardView_list_today_screen"
+            android:background="@drawable/gradient_background_2">
+
+            <TextView
+                android:id="@+id/perceived_tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:text="@string/perceived_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen" />
+
+            <TextView
+                android:id="@+id/perceived_degrees_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/perceived_tv_today"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen"
+                android:textStyle="bold"
+                tools:text="@string/_45" />
+
+            <TextView
+                android:id="@+id/uv_index_tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/uv_index_start_margin"
+                android:layout_toEndOf="@id/perceived_tv_today"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:text="@string/uv_index_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen" />
+
+            <TextView
+                android:id="@+id/uv_index_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/uv_index_tv_today"
+                android:layout_alignStart="@id/uv_index_tv_today"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:text="@string/uv_placeholder_value_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/first_line_today"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one"
+                android:layout_below="@id/uv_index_today"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_big_list_today_screen"
+                android:background="@color/line_color"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/humidity_tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/first_line_today"
+                android:layout_marginTop="@dimen/margin_big_list_today_screen"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:text="@string/humidity_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen" />
+
+            <TextView
+                android:id="@+id/humidity_percentage_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/humidity_tv_today"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen"
+                android:textStyle="bold"
+                tools:text="@string/_60" />
+
+            <TextView
+                android:id="@+id/wind_tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/first_line_today"
+                android:layout_alignStart="@id/uv_index_today"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_big_list_today_screen"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:text="@string/wind_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen" />
+
+            <TextView
+                android:id="@+id/wind_speed_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/wind_tv_today"
+                android:layout_alignStart="@id/wind_tv_today"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen"
+                android:textStyle="bold"
+                tools:text="@string/sse_7km_h" />
+
+            <View
+                android:id="@+id/second_line_today"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/one"
+                android:layout_below="@id/wind_speed_today"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_big_list_today_screen"
+                android:background="@color/line_color"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/coverage_tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/second_line_today"
+                android:layout_marginTop="@dimen/margin_small_list_today_screen"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:text="@string/coverage_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen" />
+
+            <TextView
+                android:id="@+id/coverage_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/coverage_tv_today"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen"
+                android:textStyle="bold"
+                tools:text="@string/_24" />
+
+            <TextView
+                android:id="@+id/rain_tv_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/second_line_today"
+                android:layout_alignStart="@id/wind_speed_today"
+                android:layout_marginTop="@dimen/margin_small_list_today_screen"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:text="@string/rain_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen" />
+
+            <TextView
+                android:id="@+id/rain_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rain_tv_today"
+                android:layout_alignStart="@id/rain_tv_today"
+                android:fontFamily="@font/sanseriffic"
+                android:letterSpacing="@dimen/letter_space"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_small_list_today_screen"
+                android:textStyle="bold"
+                tools:text="@string/_0cm" />
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        android:id="@+id/third_line_today"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/one"
+        android:layout_margin="@dimen/margin_big_list_today_screen"
+        android:layout_marginTop="@dimen/margin_big_list_today_screen"
+        android:background="@color/line_color"
+        app:layout_constraintTop_toBottomOf="@id/today_cardview" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

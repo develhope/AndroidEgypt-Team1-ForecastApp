@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".ui.error_screen.ErrorScreenFragment">
+
+
+    <ImageView
+        android:id="@+id/error_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_image_text_error_sreen"
+        android:src="@drawable/error_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/error_fragment_text"
+        android:layout_width="278dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="@dimen/margin_text_button_error_sreen"
+        android:src="@drawable/error_fragment_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/error_image" />
+
+    <Button
+        android:id="@+id/error_retry_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="50dp"
+        android:backgroundTint="@color/bg_button"
+        android:fontFamily="@font/sanseriffic"
+        android:letterSpacing="@dimen/letter_space"
+        android:text="@string/riprova"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="@dimen/textSize_button_error_screen"
+        app:cornerRadius="@dimen/cornerRadius_button_error_screen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/error_fragment_text" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
