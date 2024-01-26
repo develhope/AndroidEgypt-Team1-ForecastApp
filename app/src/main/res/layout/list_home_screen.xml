@@ -45,7 +45,7 @@
                 android:textFontWeight="600"
                 android:textSize="@dimen/textSize_upText_card_view_home_list_item"
                 tools:ignore="RtlSymmetry"
-                tools:text="@string/oggi" />
+                tools:text="@string/today" />
 
             <TextView
                 android:id="@+id/text_day_of_month_list"
@@ -195,7 +195,7 @@
                 android:fontFamily="@font/sanseriffic"
                 android:letterSpacing="@dimen/letter_space"
                 android:lineHeight="@dimen/linerHeight_smallText_card_view_home_list_item"
-                android:text="@string/vento"
+                android:text="@string/wind"
                 android:textColor="@color/white"
                 android:textFontWeight="400"
                 android:textSize="@dimen/textSize__smallText_card_view_home_list_item" />

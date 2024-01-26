@@ -41,7 +41,7 @@
         android:backgroundTint="@color/bg_button"
         android:fontFamily="@font/sanseriffic"
         android:letterSpacing="@dimen/letter_space"
-        android:text="@string/riprova"
+        android:text="@string/retry"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="@dimen/textSize_button_error_screen"

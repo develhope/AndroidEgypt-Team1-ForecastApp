@@ -29,7 +29,7 @@
         android:textColor="@color/black"
         android:fontFamily="@font/sanseriffic"
         android:letterSpacing="@dimen/letter_space"
-        android:text="@string/benvenuto_iniziamo"
+        android:text="@string/welcome"
         android:textAllCaps="false"
         android:textSize="@dimen/textSize_button_error_screen"
         app:cornerRadius="@dimen/cornerRadius_button_error_screen"

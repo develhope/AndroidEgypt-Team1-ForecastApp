@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginTop_textView_home_subtitle"
         android:layout_margin="@dimen/margin_textView_home_subtitle"
-        android:text="@string/prossimi_5_giorni"
+        android:text="@string/next_five_days"
         android:fontFamily="@font/sanseriffic"
         android:letterSpacing="@dimen/letter_space"
         android:textSize="@dimen/textSize_textView_home_subtitle"

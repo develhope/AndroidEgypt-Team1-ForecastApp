@@ -19,7 +19,7 @@ class DaysViewHolder(private val binding: ListHomeScreenBinding) :
         val tomorrow = OffsetDateTime.now().plusDays(1)
 
         if (item.forecast.date.dayOfMonth == tomorrow.dayOfMonth) {
-            binding.textDayOfWeekList.text = binding.root.context.getString(R.string.domani)
+            binding.textDayOfWeekList.text = binding.root.context.getString(R.string.tomorrow)
 
         } else {
             binding.textDayOfWeekList.text =

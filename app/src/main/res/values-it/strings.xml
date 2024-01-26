@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Dev Weather</string>
-    <string name="napoli_campania">Naples, Campania</string>
+    <string name="app_name">Dev Meteo</string>
+    <string name="napoli_campania">Napoli, Campania</string>
     <string name="_10_09">10/09</string>
     <string name="_22">22°</string>
     <string name="min">min</string>
@@ -8,11 +8,11 @@
     <string name="max">max</string>
     <string name="_0_mm">0 mm</string>
     <string name="precip">precip.</string>
-    <string name="_6kmh">6km/h</string>
-    <string name="wind">wind</string>
-    <string name="next_five_days">NEXT 5 DAYS</string>
-    <string name="tomorrow">Tomorrow</string>
-    <string name="today">Today</string>
+    <string name="_6kmh">6kmh</string>
+    <string name="wind">vento</string>
+    <string name="next_five_days">PROSSIMI 5 GIORNI</string>
+    <string name="tomorrow">Domani</string>
+    <string name="today">Oggi</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -29,11 +29,11 @@
 
         "Bold, graphic, intentional.\n\n"
 
-        "The foundational elements of print-based design - typography, grids, space, scale, color, "
-        "and use of imagery - guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge-to-edge "
-        "imagery, large-scale typography, and intentional white space create a bold and graphic "
-        "interface that immerses the user in the experience.\n"
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
         "An emphasis on user actions makes core functionality immediately apparent and provides "
         "waypoints for the user.\n\n"
 
@@ -44,7 +44,7 @@
         "All action takes place in a single environment. Objects are presented to the user without "
         "breaking the continuity of experience even as they transform and reorganize.\n"
         "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efficient yet coherent.\n\n"
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
 
         "3D world.\n\n"
 
@@ -94,24 +94,24 @@
         "Components with responsive elevations may encounter other components as they move between "
         "their resting elevations and dynamic elevation offsets. Because material cannot pass "
         "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per-component basis or using the entire app layout.\n"
+        "whether on a per component basis or using the entire app layout.\n"
         "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off-screen before a "
+        "For example, a floating action button (FAB) can disappear or move off screen before a "
         "user picks up a card, or it can move if a snackbar appears.\n"
         "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of the stream of cards so the FAB won’t interfere "
-        "when a user tries to pick up one of the cards.\n\n"
+        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
+        "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="retry">Retry</string>
-    <string name="recent_research">Recent Searches</string>
-    <string name="city_search">Search City</string>
-    <string name="perceived_text">Perceived</string>
-    <string name="uv_index_text">UV Index</string>
-    <string name="humidity_text">Humidity</string>
-    <string name="wind_text">Wind</string>
-    <string name="coverage_text">Coverage</string>
-    <string name="rain_text">Rain</string>
+    <string name="retry">Riprova</string>
+    <string name="recent_research">Ricerche recenti</string>
+    <string name="city_search">Cerca città</string>
+    <string name="perceived_text">Percepita</string>
+    <string name="uv_index_text">Indice UV</string>
+    <string name="humidity_text">Umidità</string>
+    <string name="wind_text">Vento</string>
+    <string name="coverage_text">Copertura</string>
+    <string name="rain_text">Pioggia</string>
     <string name="uv_placeholder_value_text">1/10</string>
     <string name="degrees">%1$s°</string>
     <string name="millimetres">%1$s mm</string>
@@ -123,6 +123,6 @@
     <string name="_45">45°</string>
     <string name="_0">0%</string>
     <string name="_24">24%</string>
-    <string name="today_title_text">Today</string>
-    <string name="welcome">Welcome, let\'s get started!</string>
+    <string name="today_title_text">Oggi</string>
+    <string name="welcome">Benvenuto, iniziamo !</string>
 </resources>

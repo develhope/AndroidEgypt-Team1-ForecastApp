@@ -12,7 +12,7 @@ import org.threeten.bp.format.DateTimeFormatter
 
 class TodayViewHolder(private val binding: ListHomeScreenBinding) : RecyclerView.ViewHolder(binding.root) {
     fun bind(item: Today, onClick: (WeekItems) -> Unit) {
-        binding.textDayOfWeekList.text = binding.root.context.getString(R.string.oggi)
+        binding.textDayOfWeekList.text = binding.root.context.getString(R.string.today)
         binding.textDayOfWeekList.textSize = 27F
         binding.textDayOfMonthList.text =
             item.forecast.date.format(DateTimeFormatter.ofPattern("dd/MM"))

@@ -44,7 +44,7 @@ class TomorrowTitleViewHolder(private val binding: TitleTodayScreenBinding) :
         val weekDay = currentDate.dayOfMonth
 
         if (weekDay == tomorrow.dayOfMonth) {
-            binding.todaySubtitleShortTv.text = binding.root.context.getString(R.string.domani)
+            binding.todaySubtitleShortTv.text = binding.root.context.getString(R.string.tomorrow)
             binding.todaySubtitleLongTv.text = fullDate
         } else{
             binding.todaySubtitleShortTv.text = formattedWeekDay

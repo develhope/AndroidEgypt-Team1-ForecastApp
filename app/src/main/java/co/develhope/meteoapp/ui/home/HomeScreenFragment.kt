@@ -71,8 +71,8 @@ class HomeScreenFragment : Fragment() {
         lifecycleScope.launch {
             val response = repo.getHomeWeather(lat, lon)
             if (response != null) {
-                binding.homeProgress.visibility = View.GONE
-                (binding.homeRecyclerView.adapter as WeekAdapter).setNewList(response.toWeekItems(requireContext()))
+                _binding?.homeProgress?.visibility = View.GONE
+                (_binding?.homeRecyclerView?.adapter as? WeekAdapter)?.setNewList(response.toWeekItems(requireContext()))
                 Log.i("NETWORK DATA", "$response")
             } else {
                 findNavController().navigate(R.id.search_screen)
