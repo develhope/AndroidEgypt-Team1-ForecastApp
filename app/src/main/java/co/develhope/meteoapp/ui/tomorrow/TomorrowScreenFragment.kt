@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import co.develhope.meteoapp.data.Data
 import co.develhope.meteoapp.data.domain.DailyDataLocal
@@ -23,12 +25,11 @@ import org.threeten.bp.format.DateTimeFormatter
 class TomorrowScreenFragment : Fragment() {
     private var _binding: FragmentTomorrowScreenBinding? = null
     private val binding get() = _binding!!
-    private val repo = WeatherRepo()
-//    private val dailyViewModel: DailyViewModel by viewModels()
+    private val tomorrowViewModel: TomorrowViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentTomorrowScreenBinding.inflate(inflater, container, false)
         return binding.root
@@ -60,7 +61,7 @@ class TomorrowScreenFragment : Fragment() {
         getDaily(latitude!!, longitude!!, selectedDate, selectedDate)
 
         setupAdapter()
-//        setupObserver()
+        setupObserver()
 
     }
 
@@ -68,40 +69,35 @@ class TomorrowScreenFragment : Fragment() {
         binding.tomorrowRecyclerview.adapter = TomorrowAdapter(listOf())
     }
 
-//    private fun setupObserver() {
-////        dailyViewModel.isLoading.observe(viewLifecycleOwner){
-////            binding.tomorrowProgress.isVisible = it
-////        }
-//
-////        dailyViewModel.result.observe(viewLifecycleOwner){
-////            (binding.tomorrowRecyclerview.adapter as TomorrowAdapter).setNewList(it.toHourlyForecastItems())
-////        }
-//    }
+    private fun setupObserver() {
+        tomorrowViewModel.isLoading.observe(viewLifecycleOwner) {
+            binding.tomorrowProgress.isVisible = it
+        }
+
+        tomorrowViewModel.dailyData.observe(viewLifecycleOwner) {
+            (binding.tomorrowRecyclerview.adapter as TomorrowAdapter).setNewList(it.toHourlyForecastItems())
+        }
+    }
 
     private fun getDaily(
         lat: Double,
         lon: Double,
         startDate: String,
-        endDate: String
+        endDate: String,
     ) {
         binding.tomorrowProgress.visibility = View.VISIBLE
-
-        lifecycleScope.launch {
-            val response = repo.getWeather(lat, lon, startDate, endDate)
-            if (response != null) {
-                binding.tomorrowProgress.visibility = View.GONE
-                (binding.tomorrowRecyclerview.adapter as TomorrowAdapter).setNewList(response.toHourlyForecastItems())
-                Log.i("NETWORK DATA", "$response")
-            } else {
-                Log.e("NETWORK ERROR", "Couldn't achieve network call. (Today Screen)")
-            }
-        }
+        tomorrowViewModel.getDaily(lat, lon, startDate, endDate)
     }
 
     private fun DailyDataLocal?.toHourlyForecastItems(): List<HourlyForecastItems> {
         val newList = mutableListOf<HourlyForecastItems>()
 
-        newList.add(HourlyForecastItems.Title(Data.getCityLocation(requireContext()), OffsetDateTime.now()))
+        newList.add(
+            HourlyForecastItems.Title(
+                Data.getCityLocation(requireContext()),
+                OffsetDateTime.now()
+            )
+        )
 
         this?.forEach { hourly ->
             newList.add(
