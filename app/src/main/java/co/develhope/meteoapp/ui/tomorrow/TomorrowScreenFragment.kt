@@ -58,7 +58,7 @@ class TomorrowScreenFragment : Fragment() {
         val selectedDate = Data.getSavedDate()!!.format(DateTimeFormatter.ofPattern("YYYY-MM-d"))
         Log.d("DATE", selectedDate!!)
 
-        getDaily(latitude!!, longitude!!, selectedDate, selectedDate)
+        tomorrowViewModel.getDaily(latitude!!,longitude!!,selectedDate,selectedDate)
 
         setupAdapter()
         setupObserver()
@@ -77,16 +77,6 @@ class TomorrowScreenFragment : Fragment() {
         tomorrowViewModel.dailyData.observe(viewLifecycleOwner) {
             (binding.tomorrowRecyclerview.adapter as TomorrowAdapter).setNewList(it.toHourlyForecastItems())
         }
-    }
-
-    private fun getDaily(
-        lat: Double,
-        lon: Double,
-        startDate: String,
-        endDate: String,
-    ) {
-        binding.tomorrowProgress.visibility = View.VISIBLE
-        tomorrowViewModel.getDaily(lat, lon, startDate, endDate)
     }
 
     private fun DailyDataLocal?.toHourlyForecastItems(): List<HourlyForecastItems> {
