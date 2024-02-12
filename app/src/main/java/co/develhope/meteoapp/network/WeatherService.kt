@@ -34,25 +34,3 @@ interface WeatherService {
     ): Response<WeeklyDataRemote>
 }
 
-private val gson: Gson = GsonBuilder()
-    .registerTypeAdapter(OffsetDateTime::class.java, OffsetDateTimeTypeAdapter())
-    .create()
-
-private val loggingInterceptor = HttpLoggingInterceptor()
-    .also { it.level = HttpLoggingInterceptor.Level.BODY }
-
-private val okHttpClient = OkHttpClient.Builder()
-    .writeTimeout(30, TimeUnit.SECONDS)
-    .readTimeout(30, TimeUnit.SECONDS)
-    .connectTimeout(30, TimeUnit.SECONDS)
-    .addInterceptor(TryCatchInterceptor())
-    .addInterceptor(loggingInterceptor)
-    .build()
-
-private val retrofit = Retrofit.Builder()
-    .baseUrl("https://api.open-meteo.com")
-    .addConverterFactory(GsonConverterFactory.create(gson))
-    .client(okHttpClient)
-    .build()
-
-val service : WeatherService = retrofit.create(WeatherService::class.java)

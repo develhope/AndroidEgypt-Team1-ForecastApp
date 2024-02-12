@@ -5,8 +5,10 @@ import co.develhope.meteoapp.data.domain.WeeklyDataLocal
 import co.develhope.meteoapp.data.dto.toDailyDataLocal
 import co.develhope.meteoapp.data.dto.toWeeklyDataLocal
 import java.text.SimpleDateFormat
+import javax.inject.Inject
 
-class WeatherRepo {
+class WeatherRepo @Inject constructor(private val service : WeatherService) {
+
     private val dailyData =
         "temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,rain,weathercode,cloudcover,windspeed_10m,winddirection_10m,uv_index,is_day"
 

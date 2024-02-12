@@ -13,29 +13,6 @@ import java.util.concurrent.TimeUnit
 
 class SearchRepo {
 
-    private val gson: Gson = GsonBuilder()
-        .registerTypeAdapter(OffsetDateTime::class.java, OffsetDateTimeTypeAdapter())
-        .create()
-
-    private val loggingInterceptor = HttpLoggingInterceptor()
-        .also { it.level = HttpLoggingInterceptor.Level.BODY }
-
-    private val okHttpClient = OkHttpClient.Builder()
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .addInterceptor(TryCatchInterceptor())
-        .addInterceptor(loggingInterceptor)
-        .build()
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://geocoding-api.open-meteo.com/")
-        .addConverterFactory(GsonConverterFactory.create(gson))
-        .client(okHttpClient)
-        .build()
-
-    private val service = retrofit.create(SearchService::class.java)
-
     suspend fun getSearch(
         cityName: String
     ): SearchDataLocal? {
