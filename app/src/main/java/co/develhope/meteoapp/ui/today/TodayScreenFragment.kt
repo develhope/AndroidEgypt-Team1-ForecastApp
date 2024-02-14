@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import co.develhope.meteoapp.data.Data
 import co.develhope.meteoapp.data.domain.DailyDataLocal
 import co.develhope.meteoapp.data.domain.HourlyForecast
@@ -17,6 +18,8 @@ import co.develhope.meteoapp.ui.today.adapter.HourlyForecastItems
 import co.develhope.meteoapp.ui.today.adapter.TodayAdapter
 import co.develhope.meteoapp.ui.DailyViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -75,11 +78,16 @@ class TodayScreenFragment : Fragment() {
     }
 
     private fun setupObserver() {
-        dailyViewModel.isLoading.observe(viewLifecycleOwner) {
-            binding.todayProgress.isVisible = it
+
+        lifecycleScope.launch {
+            dailyViewModel.dailyData.collectLatest{
+                (binding.todayRecyclerview.adapter as TodayAdapter).setNewList(it.toHourlyForecastItems())
+            }
         }
-        dailyViewModel.dailyData.observe(viewLifecycleOwner) {
-            (binding.todayRecyclerview.adapter as TodayAdapter).setNewList(it.toHourlyForecastItems())
+        lifecycleScope.launch{
+            dailyViewModel.isLoading.collectLatest{
+                binding.todayProgress.isVisible = it
+            }
         }
     }
 

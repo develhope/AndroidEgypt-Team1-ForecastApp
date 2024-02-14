@@ -19,6 +19,7 @@ import co.develhope.meteoapp.ui.home.adapter.WeekAdapter
 import co.develhope.meteoapp.ui.search.adapter.DataSearches
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -69,18 +70,22 @@ class HomeScreenFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        weeklyViewModel.weeklyData.observe(requireActivity()) {
-            (_binding?.homeRecyclerView?.adapter as? WeekAdapter)?.setNewList(
-                it.toWeekItems(
-                    requireContext()
+        lifecycleScope.launch {
+            weeklyViewModel.weeklyData.collect {
+                (_binding?.homeRecyclerView?.adapter as? WeekAdapter)?.setNewList(
+                    it.toWeekItems(
+                        requireContext()
+                    )
                 )
-            )
-        }
-        weeklyViewModel.isLoading.observe(requireActivity()) {
-            _binding?.homeProgress?.isVisible = it
+            }
         }
         lifecycleScope.launch {
-            weeklyViewModel.navigationCommand.collect{ isTrue ->
+            weeklyViewModel.isLoading.collectLatest {
+                _binding?.homeProgress?.isVisible = it
+            }
+        }
+        lifecycleScope.launch {
+            weeklyViewModel.navigationCommand.collectLatest { isTrue ->
                 findNavController().navigate(R.id.search_screen)
             }
         }
