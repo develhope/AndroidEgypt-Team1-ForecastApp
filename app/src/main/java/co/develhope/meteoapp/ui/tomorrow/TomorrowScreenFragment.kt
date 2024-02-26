@@ -8,24 +8,22 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import co.develhope.meteoapp.data.Data
 import co.develhope.meteoapp.data.domain.DailyDataLocal
 import co.develhope.meteoapp.data.domain.HourlyForecast
 import co.develhope.meteoapp.databinding.FragmentTomorrowScreenBinding
-import co.develhope.meteoapp.network.WeatherRepo
+import co.develhope.meteoapp.ui.DailyViewModel
 import co.develhope.meteoapp.ui.search.adapter.DataSearches
 import co.develhope.meteoapp.ui.today.adapter.HourlyForecastItems
 import co.develhope.meteoapp.ui.tomorrow.adapter.TomorrowAdapter
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
-
-
+@AndroidEntryPoint
 class TomorrowScreenFragment : Fragment() {
     private var _binding: FragmentTomorrowScreenBinding? = null
     private val binding get() = _binding!!
-    private val tomorrowViewModel: TomorrowViewModel by viewModels()
+    private val dailyViewModel: DailyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,7 +56,7 @@ class TomorrowScreenFragment : Fragment() {
         val selectedDate = Data.getSavedDate()!!.format(DateTimeFormatter.ofPattern("YYYY-MM-d"))
         Log.d("DATE", selectedDate!!)
 
-        tomorrowViewModel.getDaily(latitude!!,longitude!!,selectedDate,selectedDate)
+        dailyViewModel.getDaily(latitude!!,longitude!!,selectedDate,selectedDate)
 
         setupAdapter()
         setupObserver()
@@ -70,11 +68,11 @@ class TomorrowScreenFragment : Fragment() {
     }
 
     private fun setupObserver() {
-        tomorrowViewModel.isLoading.observe(viewLifecycleOwner) {
+        dailyViewModel.isLoading.observe(viewLifecycleOwner) {
             binding.tomorrowProgress.isVisible = it
         }
 
-        tomorrowViewModel.dailyData.observe(viewLifecycleOwner) {
+        dailyViewModel.dailyData.observe(viewLifecycleOwner) {
             (binding.tomorrowRecyclerview.adapter as TomorrowAdapter).setNewList(it.toHourlyForecastItems())
         }
     }

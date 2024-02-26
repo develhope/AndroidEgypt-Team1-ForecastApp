@@ -15,7 +15,9 @@ import java.lang.Exception
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+
 class SearchRepo @Inject constructor(private val service: SearchService) :SearchService {
+
 
     suspend fun getSearch(
         cityName: String
