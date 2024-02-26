@@ -1,9 +1,10 @@
 package co.develhope.meteoapp.network.di
 
 import co.develhope.meteoapp.network.OffsetDateTimeTypeAdapter
-import co.develhope.meteoapp.network.SearchRepo
 import co.develhope.meteoapp.network.SearchService
 import co.develhope.meteoapp.network.TryCatchInterceptor
+import co.develhope.meteoapp.network.WeatherRepo
+import co.develhope.meteoapp.network.WeatherService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -20,7 +21,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object SearchModule {
+object NetworkModule {
     @Provides
     @Singleton
     fun providesGson():Gson{
@@ -49,7 +50,7 @@ object SearchModule {
     @Singleton
     fun providesRetrofit(okHttpClient: OkHttpClient,gson:Gson):Retrofit{
         return Retrofit.Builder()
-            .baseUrl("https://geocoding-api.open-meteo.com/")
+            .baseUrl("https://api.open-meteo.com")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(okHttpClient)
             .build()
@@ -58,5 +59,13 @@ object SearchModule {
     @Singleton
     fun providesSearchApi(retrofit: Retrofit):SearchService{
         return retrofit.create(SearchService::class.java)
+    }
+    @Provides
+    fun getWeatherRepo(service : WeatherService) : WeatherRepo {
+        return WeatherRepo(service)
+    }
+    @Provides
+    fun getWeatherService(retrofit: Retrofit) : WeatherService {
+        return retrofit.create(WeatherService::class.java)
     }
 }

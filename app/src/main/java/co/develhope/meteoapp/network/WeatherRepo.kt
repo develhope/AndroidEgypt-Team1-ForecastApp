@@ -19,8 +19,8 @@ class WeatherRepo @Inject constructor(private val service: WeatherService) {
         "precipitation_sum,temperature_2m_max,temperature_2m_min,weathercode,windspeed_10m_max"
 
     suspend fun getWeather(
-        lat: Double,
-        lon: Double,
+        lat: Double?,
+        lon: Double?,
         startDate: String,
         endDate: String,
     ): Flow<Resources<DailyDataLocal>> {
@@ -44,6 +44,8 @@ class WeatherRepo @Inject constructor(private val service: WeatherService) {
             }
         }
     }
+
+
 
     suspend fun getHomeWeather(
         lat: Double,

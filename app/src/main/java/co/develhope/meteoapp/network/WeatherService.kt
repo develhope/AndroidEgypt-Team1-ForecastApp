@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit
 interface WeatherService {
     @GET("/v1/forecast")
     suspend fun getDaily(
-        @Query("latitude") latitude: Double,
-        @Query("longitude") longitude: Double,
+        @Query("latitude") latitude: Double?,
+        @Query("longitude") longitude: Double?,
         @Query("hourly") hourly: String,
         @Query("timezone") timezone: String,
         @Query("start_date") startDate: String,

@@ -13,12 +13,11 @@ import co.develhope.meteoapp.data.Data
 import co.develhope.meteoapp.data.domain.DailyDataLocal
 import co.develhope.meteoapp.data.domain.HourlyForecast
 import co.develhope.meteoapp.databinding.FragmentTomorrowScreenBinding
-import co.develhope.meteoapp.ui.DailyViewModel
+import co.develhope.meteoapp.ui.today.TodayViewModel
 import co.develhope.meteoapp.ui.search.adapter.DataSearches
 import co.develhope.meteoapp.ui.today.adapter.HourlyForecastItems
 import co.develhope.meteoapp.ui.tomorrow.adapter.TomorrowAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
@@ -28,7 +27,7 @@ import org.threeten.bp.format.DateTimeFormatter
 class TomorrowScreenFragment : Fragment() {
     private var _binding: FragmentTomorrowScreenBinding? = null
     private val binding get() = _binding!!
-    private val dailyViewModel: DailyViewModel by viewModels()
+    private val todayViewModel: TodayViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +60,7 @@ class TomorrowScreenFragment : Fragment() {
         val selectedDate = Data.getSavedDate()!!.format(DateTimeFormatter.ofPattern("YYYY-MM-d"))
         Log.d("DATE", selectedDate!!)
 
-        dailyViewModel.getDaily(latitude!!, longitude!!, selectedDate, selectedDate)
+        todayViewModel.getDaily(latitude!!, longitude!!, selectedDate, selectedDate)
 
         setupAdapter()
         setupObserver()
@@ -74,12 +73,12 @@ class TomorrowScreenFragment : Fragment() {
 
     private fun setupObserver() {
         lifecycleScope.launch {
-            dailyViewModel.dailyData.collectLatest {
+            todayViewModel.dailyData.collectLatest {
                 (binding.tomorrowRecyclerview.adapter as TomorrowAdapter).setNewList(it.toHourlyForecastItems())
             }
         }
         lifecycleScope.launch{
-            dailyViewModel.isLoading.collectLatest{
+            todayViewModel.isLoading.collectLatest{
                 binding.tomorrowProgress.isVisible = it
             }
         }
