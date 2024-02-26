@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+
 import co.develhope.meteoapp.data.Data
 import co.develhope.meteoapp.data.domain.DailyDataLocal
 import co.develhope.meteoapp.data.domain.HourlyForecast
@@ -16,10 +16,7 @@ import co.develhope.meteoapp.databinding.FragmentTodayScreenBinding
 import co.develhope.meteoapp.ui.search.adapter.DataSearches
 import co.develhope.meteoapp.ui.today.adapter.HourlyForecastItems
 import co.develhope.meteoapp.ui.today.adapter.TodayAdapter
-import co.develhope.meteoapp.ui.DailyViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
+
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -27,6 +24,7 @@ import org.threeten.bp.format.DateTimeFormatter
 class TodayScreenFragment : Fragment() {
 
     private var _binding: FragmentTodayScreenBinding? = null
+    private val viewModel:TodayScreenViewModel by viewModels()
     private val binding get() = _binding!!
 
     private val dailyViewModel: DailyViewModel by viewModels()
@@ -42,8 +40,10 @@ class TodayScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+          viewModel.dailyDataLocal.observe(viewLifecycleOwner,{
+              setupAdapter(it.toHourlyForecastItems())
+          })
         val dataSearches = Data.getSearchCity(requireContext())
-
         var longitude = DataSearches.ItemSearch(
             longitude = 0.0,
             latitude = 0.0,
@@ -53,7 +53,6 @@ class TodayScreenFragment : Fragment() {
         if (dataSearches is DataSearches.ItemSearch) {
             longitude = dataSearches.longitude
         }
-
         var latitude = DataSearches.ItemSearch(
             longitude = 0.0,
             latitude = 0.0,
@@ -63,33 +62,17 @@ class TodayScreenFragment : Fragment() {
         if (dataSearches is DataSearches.ItemSearch) {
             latitude = dataSearches.latitude
         }
-
-        val currentDate = OffsetDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-d"))
+        val currentDate = org.threeten.bp.OffsetDateTime.now().format(org.threeten.bp.format.DateTimeFormatter.ofPattern("YYYY-MM-d"))
         Log.d("DATE:", currentDate)
 
-        dailyViewModel.getDaily(latitude!!, longitude!!, currentDate, currentDate)
 
-        setupAdapter()
-        setupObserver()
     }
 
-    private fun setupAdapter() {
-        binding.todayRecyclerview.adapter = TodayAdapter(listOf())
+    private fun setupAdapter(forecastItems:List<HourlyForecastItems>) {
+        binding.todayRecyclerview.adapter = TodayAdapter(forecastItems)
     }
 
-    private fun setupObserver() {
 
-        lifecycleScope.launch {
-            dailyViewModel.dailyData.collectLatest{
-                (binding.todayRecyclerview.adapter as TodayAdapter).setNewList(it.toHourlyForecastItems())
-            }
-        }
-        lifecycleScope.launch{
-            dailyViewModel.isLoading.collectLatest{
-                binding.todayProgress.isVisible = it
-            }
-        }
-    }
 
     private fun DailyDataLocal?.toHourlyForecastItems(): List<HourlyForecastItems> {
 
